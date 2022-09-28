@@ -1,0 +1,69 @@
+.tableau {
+    display: flex;
+}
+
+.pile {
+    position: relative;
+    flex-direction: column;
+    width: 5rem;
+    height: 7rem;
+    margin: 0.5rem;
+    border: 1px solid lightgrey;
+}
+
+.card-drag {
+    /* width: 100%;
+    height: 100%; */
+}
+
+.card-container {
+    transform: translateY(1px);
+    box-sizing: border-box;
+}
+
+.card-inner {
+    width: 5rem;
+    height: 7rem;
+    transition: transform 0.5s;
+    transform: rotateY(0deg);
+    transform-style: preserve-3d;
+    transition-timing-function: cubic-bezier(0.23, 1, 0.320, 1);
+    border: 1px solid black;
+}
+
+.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    box-sizing: border-box;
+}
+
+.card {
+    background-color: white;
+    transform: rotateY(180deg);
+    padding: 0.5rem;
+}
+
+.card-back {
+    background-color: gray;
+    transform: rotateY(0deg);
+}
+
+.card.club, .card.spade {
+    color: black;
+}
+
+.card.diamond, .card.heart {
+    color: red;
+}
+
+.card.back {
+    transform: rotateY(180deg);
+    transition: transform;
+    background-color: ;
+}
