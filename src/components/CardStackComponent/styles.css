@@ -11,5 +11,5 @@
 }
 
 .fan-direction-left {
-    flex-direction: row-reverse;
+    flex-direction: row;
 }

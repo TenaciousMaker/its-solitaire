@@ -153,11 +153,11 @@ export function isNextFoundationCard(top: PlayingCard | undefined, bottom: Playi
 }
 
 export function isNextCard(top: PlayingCard | undefined, bottom: PlayingCard | undefined): boolean {
-    return true;//bottom ? top?.value === bottom.value - 1 : top?.value === 0;
+    return bottom ? top?.value === bottom.value - 1 : top?.value === 0;
 }
 
 export function isAltSuit(c1: PlayingCard | undefined, c2: PlayingCard | undefined): boolean {
-    return true;// c1 !== undefined && c2 !== undefined && (c1.suit % 2 !== c2.suit % 2);
+    return c1 !== undefined && c2 !== undefined && (c1.suit % 2 !== c2.suit % 2);
 }
 
 export function isSameSuit(c1: PlayingCard | undefined, c2: PlayingCard | undefined): boolean {

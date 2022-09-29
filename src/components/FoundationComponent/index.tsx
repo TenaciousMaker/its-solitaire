@@ -14,7 +14,7 @@ export default function FoundationComponent({ foundation, onDrop }: Props) {
     return (
         <div className="foundation">
             {foundation.map((pile: Pile, pileIndex: number) => {
-                const dropSetup = (pidx: number) => (cardIndex: number) => {
+                const dropSetup = (pidx: number) => (cardIndex?: number) => {
                     const dropPayload = {
                         pileIndex: pidx,
                         cardIndex,

@@ -21,7 +21,7 @@ export default function TableauComponent({ tableau, onDrop, onClick }: Props) {
                 function handleDoubleClick(cardIndex: number) {
                     // onFlip(pileIndex, cardIndex);
                 }
-                const dropSetup = (pidx: number) => (cardIndex: number) => {
+                const dropSetup = (pidx: number) => (cardIndex?: number) => {
                     const dropPayload = {
                         pileIndex: pidx,
                         cardIndex,

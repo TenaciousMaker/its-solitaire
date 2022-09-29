@@ -9,7 +9,7 @@ type Props = {
     onClick?(cardIndex: number): void;
     onDoubleClick?(cardIndex: number): void;
     onDragSetup(cardIndex: number): void;
-    onDropSetup?(cardIndex: number): void;
+    onDropSetup?(cardIndex?: number): void;
 };
 
 /*
@@ -28,7 +28,7 @@ export default function CardStackComponent({
     }`;
 
     return (
-        <div className={pileClass}>
+        <div className={pileClass} {...(onDropSetup ? onDropSetup() : {})}>
             {pile.map((card, cardIndex) => {
                 function handleClick() {
                     if (onClick) {

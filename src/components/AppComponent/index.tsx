@@ -60,10 +60,13 @@ export default function AppComponent() {
 
     return (
         <div className='game'>
-            <FoundationComponent foundation={foundation} onDrop={handleDrop} />
+            <div className='top-container'>
+                <FoundationComponent foundation={foundation} onDrop={handleDrop} />
+                <div className='spacer'></div>
+                <WasteComponent waste={waste} onDoubleClick={handleDoubleClick(AppContext.Waste)} />
+                <StockComponent stock={stock} onClick={handleClick(AppContext.Stock)} onDrop={handleDrop} />
+            </div>
             <TableauComponent tableau={tableau} onDrop={handleDrop} onClick={handleClick(AppContext.Tableau)} />
-            <StockComponent stock={stock} onClick={handleClick(AppContext.Stock)} onDrop={handleDrop} />
-            <WasteComponent waste={waste} onDoubleClick={handleDoubleClick(AppContext.Waste)} />
         </div>
     );
 }
