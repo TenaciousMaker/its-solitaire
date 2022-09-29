@@ -1,3 +1,6 @@
+import { CardSuit } from "./enums/CardSuit";
+import { CardValue } from "./enums/CardValue";
+
 export interface PlayingCard {
     suit: CardSuit;
     value: CardValue;
@@ -15,28 +18,4 @@ export interface Solitaire {
     waste: Waste;
     tableau: Tableau;
     foundation: Foundation;
-}
-
-// Not listed in suit priority.
-export enum CardSuit {
-    Club = 0,
-    Diamond,
-    Spade,
-    Heart,
-}
-
-export enum CardValue {
-    Ace = 0,
-    Two,
-    Three,
-    Four,
-    Five,
-    Six,
-    Seven,
-    Eight,
-    Nine,
-    Ten,
-    Jack,
-    Queen,
-    King,
 }

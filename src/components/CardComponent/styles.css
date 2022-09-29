@@ -1,6 +1,15 @@
 .card-container {
     transform: translateY(1px);
     box-sizing: border-box;
+    height: 0;
+}
+
+.fan-direction-down .card-container {
+    height: 2px;
+}
+
+.fan-direction-down .card-container.flipped {
+    height: 2rem;
 }
 
 .card-inner {

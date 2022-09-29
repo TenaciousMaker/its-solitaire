@@ -1,4 +1,6 @@
-import { CardSuit, CardValue, PlayingCard } from "../../model";
+import { PlayingCard } from "../../../model";
+import { CardValue } from "../../../CardValue";
+import { CardSuit } from "../../../enums/CardSuit";
 import {
     getCard,
     buildDeck,
@@ -13,7 +15,7 @@ import {
     recycleWastePile,
     moveWasteToTableau,
     moveWasteToFoundation,
-} from "../service";
+} from "../../../services/gameService";
 
 describe("service", () => {
   it(`builds a deck of cards`, () => {
