@@ -1,4 +1,4 @@
-import { CardSuit, CardValue, PlayingCard } from "../model";
+import { CardSuit, CardValue, PlayingCard } from "../../model";
 import {
     getCard,
     buildDeck,

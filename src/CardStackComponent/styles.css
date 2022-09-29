@@ -1,0 +1,15 @@
+.pile {
+    position: relative;
+    width: 5rem;
+    height: 7rem;
+    margin: 0.5rem;
+    border: 1px solid lightgrey;
+}
+
+.fan-direction-down {
+    flex-direction: column;
+}
+
+.fan-direction-left {
+    flex-direction: row-reverse;
+}

@@ -1,4 +1,4 @@
-import { Pile, Stock, Tableau, PlayingCard, Waste, Foundation, CardValue, Solitaire, CardSuit } from "./model";
+import { Pile, Stock, Tableau, PlayingCard, Waste, Foundation, CardValue, Solitaire, CardSuit } from "../model";
 
 // Build a new deck of cards, in order.
 export function buildDeck(): Pile {

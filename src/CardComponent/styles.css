@@ -1,21 +1,3 @@
-.tableau {
-    display: flex;
-}
-
-.pile {
-    position: relative;
-    flex-direction: column;
-    width: 5rem;
-    height: 7rem;
-    margin: 0.5rem;
-    border: 1px solid lightgrey;
-}
-
-.card-drag {
-    /* width: 100%;
-    height: 100%; */
-}
-
 .card-container {
     transform: translateY(1px);
     box-sizing: border-box;
@@ -60,10 +42,4 @@
 
 .card.diamond, .card.heart {
     color: red;
-}
-
-.card.back {
-    transform: rotateY(180deg);
-    transition: transform;
-    background-color: ;
 }

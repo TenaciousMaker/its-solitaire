@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { flipCardInTableau, initGame, movePile } from './service';
-import Tableau from '../Tableau';
+import TableauComponent from '../TableauComponent';
 import './styles.css';
 
 export default function AppComponent() {
@@ -20,7 +20,7 @@ export default function AppComponent() {
 
     return (
         <div className='game'>
-            <Tableau tableau={tableau} onMove={handleMove} onFlip={handleFlip} />
+            <TableauComponent tableau={tableau} onMove={handleMove} onFlip={handleFlip} />
         </div>
     );
 }

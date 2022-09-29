@@ -1,0 +1,12 @@
+.tableau {
+    display: flex;
+}
+
+.pile {
+    position: relative;
+    flex-direction: column;
+    width: 5rem;
+    height: 7rem;
+    margin: 0.5rem;
+    border: 1px solid lightgrey;
+}
