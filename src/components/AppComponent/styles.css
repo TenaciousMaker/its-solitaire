@@ -1,7 +1,31 @@
-.top-container {
-    display: flex;
+:root {
+    --card-width: 6rem;
+    --card-aspect: 5/7;
+    --layout-gap: 1.1rem;
 }
 
-.spacer {
-    flex-grow: 1;
+.game {
+    background-color: green;
+    width: 950px;
+    display: flex;
+    flex-direction: column;
+    padding: 5rem;
+    box-sizing: border-box;
+    gap: var(--layout-gap);
+    margin: 0 auto;
+}
+
+.top-container {
+    display: flex;
+    flex: auto;
+    gap: var(--layout-gap);
+    align-items: center;
+}
+
+.stock-container {
+    display: flex;
+    flex: auto;
+    gap: var(--layout-gap);
+    align-items: center;
+    justify-content: end;
 }

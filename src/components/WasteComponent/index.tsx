@@ -18,13 +18,16 @@ export default function WasteComponent({
         onDoubleClick(cardIndex);
     }
     const dragSetup = (cardIndex: number) => {
-        return getDraggable(AppContext.Waste, {cardIndex});
+        if (cardIndex === waste.length - 1) {
+            return getDraggable(AppContext.Waste, {cardIndex});
+        }
+        return {};
     }
     return (
         <div className='waste'>
             <CardStackComponent
                 pile={waste}
-                fanDirection="left"
+                pileType={AppContext.Waste}
                 onDoubleClick={handleDoubleClick}
                 onDragSetup={dragSetup}
             />

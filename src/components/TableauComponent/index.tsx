@@ -1,17 +1,18 @@
 import React from "react";
 import { Tableau, Pile } from "../../model";
-import CardStackComponent from "../CardStackComponent";
-import "./styles.css";
 import { DropFunction, getDraggable, getDroppable } from "../../services/dragdropService";
 import { AppContext } from "../../enums/AppContext";
+import CardStackComponent from "../CardStackComponent";
+import "./styles.css";
 
 type Props = {
     tableau: Tableau;
     onDrop: DropFunction,
-    onClick: (pileIndex: number, cardIndex: number) => void;
+    onClick: (cardIndex: number, pileIndex: number) => void;
+    onDoubleClick: (cardIndex: number, pileIndex: number) => void;
 };
 
-export default function TableauComponent({ tableau, onDrop, onClick }: Props) {
+export default function TableauComponent({ tableau, onDrop, onClick, onDoubleClick }: Props) {
     return (
         <div className="tableau">
             {tableau.map((pile: Pile, pileIndex: number) => {
@@ -19,7 +20,7 @@ export default function TableauComponent({ tableau, onDrop, onClick }: Props) {
                     onClick(cardIndex, pileIndex);
                 }
                 function handleDoubleClick(cardIndex: number) {
-                    // onFlip(pileIndex, cardIndex);
+                    onDoubleClick(cardIndex, pileIndex);
                 }
                 const dropSetup = (pidx: number) => (cardIndex?: number) => {
                     const dropPayload = {
@@ -39,7 +40,7 @@ export default function TableauComponent({ tableau, onDrop, onClick }: Props) {
                     <CardStackComponent
                         key={pileIndex}
                         pile={pile}
-                        fanDirection="down"
+                        pileType={AppContext.Tableau}
                         onClick={handleClick}
                         onDoubleClick={handleDoubleClick}
                         onDropSetup={dropSetup(pileIndex)}

@@ -5,6 +5,7 @@ export interface PlayingCard {
     suit: CardSuit;
     value: CardValue;
     faceUp: boolean;
+    key: string;
 }
 
 export type Pile = Array<PlayingCard>;

@@ -1,12 +1,12 @@
-import React from "react";
+import React, { createRef, ReactHTML, ReactHTMLElement } from "react";
 import { Pile } from "../../model";
 import CardComponent from "../CardComponent";
 import "./styles.css";
 
 type Props = {
     pile: Pile;
-    fanDirection?: "left" | "down";
-    onClick?(cardIndex: number): void;
+    pileType?: "tableau" | "waste";
+    onClick?(cardIndex?: number): void;
     onDoubleClick?(cardIndex: number): void;
     onDragSetup(cardIndex: number): void;
     onDropSetup?(cardIndex?: number): void;
@@ -21,14 +21,34 @@ export default function CardStackComponent({
     onDoubleClick,
     onDragSetup,
     onDropSetup,
-    fanDirection,
+    pileType,
 }: Props) {
     const pileClass = `pile${
-        fanDirection ? " fan-direction-" + fanDirection : ""
+        pileType ? " pile-type-" + pileType : ""
     }`;
 
+    function handleEmptyClick() {
+        if (onClick) {
+            onClick();
+        }
+    }
+
+    const refs: Array<React.RefObject<HTMLDivElement>> = [];
+
+    function explode() {
+        refs.forEach(({current: element}) => {
+            if (element) {
+                const x = Math.floor(Math.random() * 4) - 2;
+                const y = Math.floor(Math.random() * 4) - 2;
+                const z = Math.floor(Math.random() * 4) - 2;
+                const rot = Math.floor(Math.random() * 360);
+                element.style.transform = `rotate3d(${x}, ${y}, ${z}, ${rot}deg)`;
+            }
+        });
+    }
+
     return (
-        <div className={pileClass} {...(onDropSetup ? onDropSetup() : {})}>
+        <div className={pileClass} {...(onDropSetup ? onDropSetup() : {})} onClick={handleEmptyClick}>
             {pile.map((card, cardIndex) => {
                 function handleClick() {
                     if (onClick) {
@@ -38,13 +58,18 @@ export default function CardStackComponent({
                 function handleDoubleClick() {
                     if (onDoubleClick) {
                         onDoubleClick(cardIndex);
+                        // explode();
                     }
                 }
+                const ref = createRef<HTMLDivElement>();
+                // refs.push(ref);
                 return (
                     <div
+                        ref={ref}
+                        key={card.key}
+                        className="card-outer"
                         {...(onDragSetup ? onDragSetup(cardIndex) : {})}
                         {...(onDropSetup ? onDropSetup(cardIndex) : {})}
-                        key={cardIndex}
                     >
                         <CardComponent
                             {...card}

@@ -1,15 +1,40 @@
 .pile {
     position: relative;
-    width: 5rem;
-    height: 7rem;
-    margin: 0.5rem;
-    border: 1px solid lightgrey;
+    aspect-ratio: var(--card-aspect);
+    width: var(--card-width);
+    border: 1px solid darkgreen;
+    background-color: forestgreen;
 }
 
-.fan-direction-down {
+.pile-type-tableau {
     flex-direction: column;
 }
 
-.fan-direction-left {
+.pile-type-waste {
     flex-direction: row;
+}
+
+.card-outer {
+    position: relative;
+}
+
+.pile-type-waste .card-outer:nth-last-child(1) {
+    left: 0;
+    z-index: 3;
+}
+.pile-type-waste .card-outer:nth-last-child(2) {
+    left: -2.5rem;
+    z-index: 2;
+}
+.pile-type-waste .card-outer:nth-last-child(3) {
+    left: -5rem;
+    z-index: 1;
+}
+
+.pile-type-waste .card-outer {
+    left: -5rem;
+    z-index: 0;
+    transition: all 0.3s;
+    transform-style: preserve-3d;
+    transition-timing-function: cubic-bezier(0.23, 1, 0.320, 1);
 }

@@ -1,3 +1,5 @@
 .foundation {
     display: flex;
+    gap: var(--layout-gap);
+    flex: 1;
 }

@@ -56,10 +56,7 @@ export function moveStockToWaste(stock: Stock, waste: Waste): [Stock, Waste] {
 // Recycle waste pile back to stock.
 export function recycleWastePile(waste: Waste): Stock {
     return waste.slice().reverse().map(card => {
-        if (card) {
-            flipCardDown(card);
-        }
-        return card;
+        return flipCardDown(card);
     });
 }
 
@@ -91,12 +88,9 @@ export function moveWasteToFoundation(waste: Waste, foundation: Foundation, p: n
 
 // Shift cards between piles in the tableau.
 export function movePile(tableau: Tableau, p1: number, p2: number, idx: number): Tableau {
-    console.log(p1, p2, idx, tableau)
     const top = tableau[p1][idx];
     const bottom = tableau[p2][tableau[p2].length - 1];
-    console.log(top, bottom)
     if (isNextTableauCard(top, bottom)) {
-        console.log('YEP')
         const tab = tableau.slice();
         const pile1 = tab[p1].slice(0, idx);
         const pile2 = tab[p2].concat(tab[p1].slice(idx));
@@ -121,7 +115,12 @@ export function moveTableauCardToFoundation(
         const tableauCopy = tableau.slice();
         tableauCopy[p] = tableauCopy[p].slice(0, c);
         const foundationCopy = foundation.slice();
-        foundationCopy[idx] = foundationCopy[idx].concat(top);
+        // Ensure ace is in the right pile, according to its suit.
+        if (top.value === CardValue.Ace) {
+            foundationCopy[top.suit] = foundationCopy[top.suit].concat(top);
+        } else {
+            foundationCopy[idx] = foundationCopy[idx].concat(top);
+        }
         return [tableauCopy, foundationCopy];
     }
     return [tableau, foundation];
@@ -141,26 +140,26 @@ export function flipCardInTableau(tableau: Tableau, pileIndex: number, cardIndex
 
 // Create a new card.
 export function getCard(suit: CardSuit, value: CardValue, faceUp: boolean = false): PlayingCard {
-    return {suit, value, faceUp};
+    return {suit, value, faceUp, key: `${suit}${value}`};
 }
 
-export function isNextTableauCard(top: PlayingCard | undefined, bottom: PlayingCard | undefined): boolean {
-    return (bottom ? isNextCard(top, bottom) && isAltSuit(top, bottom) : top?.value === CardValue.King);
+export function isNextTableauCard(top: PlayingCard, bottom: PlayingCard): boolean {
+    return (bottom ? isNextCard(top, bottom, -1) && isAltSuit(top, bottom) : top.value === CardValue.King);
 }
 
-export function isNextFoundationCard(top: PlayingCard | undefined, bottom: PlayingCard | undefined): boolean {
-    return (bottom ? isNextCard(top, bottom) && isSameSuit(top, bottom) : top?.value === CardValue.Ace);
+export function isNextFoundationCard(top: PlayingCard, bottom: PlayingCard): boolean {
+    return (bottom ? isNextCard(top, bottom) && isSameSuit(top, bottom) : top.value === CardValue.Ace);
 }
 
-export function isNextCard(top: PlayingCard | undefined, bottom: PlayingCard | undefined): boolean {
-    return bottom ? top?.value === bottom.value - 1 : top?.value === 0;
+export function isNextCard(top: PlayingCard, bottom: PlayingCard, increment: number = 1): boolean {
+    return top.value === bottom.value + increment;
 }
 
-export function isAltSuit(c1: PlayingCard | undefined, c2: PlayingCard | undefined): boolean {
+export function isAltSuit(c1: PlayingCard, c2: PlayingCard): boolean {
     return c1 !== undefined && c2 !== undefined && (c1.suit % 2 !== c2.suit % 2);
 }
 
-export function isSameSuit(c1: PlayingCard | undefined, c2: PlayingCard | undefined): boolean {
+export function isSameSuit(c1: PlayingCard, c2: PlayingCard): boolean {
     return c2 ? c1?.suit === c2.suit : true;
 }
 
