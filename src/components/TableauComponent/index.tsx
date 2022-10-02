@@ -2,7 +2,7 @@ import React from "react";
 import { Tableau, Pile } from "../../model";
 import { DropFunction, getDraggable, getDroppable } from "../../services/dragdropService";
 import { AppContext } from "../../enums/AppContext";
-import CardStackComponent from "../CardStackComponent";
+import PileComponent from "../PileComponent";
 import "./styles.css";
 
 type Props = {
@@ -14,7 +14,7 @@ type Props = {
 
 export default function TableauComponent({ tableau, onDrop, onClick, onDoubleClick }: Props) {
     return (
-        <div className="tableau">
+        <div className={AppContext.Tableau}>
             {tableau.map((pile: Pile, pileIndex: number) => {
                 function handleClick(cardIndex: number) {
                     onClick(cardIndex, pileIndex);
@@ -37,7 +37,7 @@ export default function TableauComponent({ tableau, onDrop, onClick, onDoubleCli
                     return getDraggable(AppContext.Tableau, dropPayload);
                 }
                 return (
-                    <CardStackComponent
+                    <PileComponent
                         key={pileIndex}
                         pile={pile}
                         pileType={AppContext.Tableau}

@@ -1,31 +1,55 @@
 :root {
-    --card-width: 6rem;
     --card-aspect: 5/7;
-    --layout-gap: 1.1rem;
+    --layout-gap: 1rem;
+    box-sizing: border-box;
 }
 
 .game {
     background-color: green;
-    width: 950px;
-    display: flex;
-    flex-direction: column;
-    padding: 5rem;
-    box-sizing: border-box;
+    display: grid;
+    max-width: 950px;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(2, auto);
+    grid-template-areas:
+        "fd fd fd fd .  ws st"
+        "tb tb tb tb tb tb tb";
     gap: var(--layout-gap);
+    padding: 5rem;
     margin: 0 auto;
 }
 
-.top-container {
-    display: flex;
-    flex: auto;
-    gap: var(--layout-gap);
-    align-items: center;
+@media screen and (max-width: 500px) {
+    :root {
+        --layout-gap: 2px;
+    }
+    .game {
+        padding: 0.5rem;
+        grid-template-rows: repeat(3, auto);
+        grid-template-areas:
+            ". . . . . ws st"
+            "fd fd fd fd . . ."
+            "tb tb tb tb tb tb tb";
+    }
 }
 
-.stock-container {
-    display: flex;
-    flex: auto;
+.foundation {
+    grid-area: fd;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: var(--layout-gap);
-    align-items: center;
-    justify-content: end;
+}
+
+.waste {
+    grid-area: ws;
+}
+
+.stock {
+    grid-area: st;
+}
+
+.tableau {
+    grid-area: tb;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: var(--layout-gap);
 }

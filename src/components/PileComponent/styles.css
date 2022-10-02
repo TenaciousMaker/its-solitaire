@@ -1,9 +1,9 @@
 .pile {
     position: relative;
     aspect-ratio: var(--card-aspect);
-    width: var(--card-width);
     border: 1px solid darkgreen;
     background-color: forestgreen;
+    perspective: 10%;
 }
 
 .pile-type-tableau {
@@ -16,25 +16,25 @@
 
 .card-outer {
     position: relative;
+    transform: translateZ(0);
 }
 
 .pile-type-waste .card-outer:nth-last-child(1) {
     left: 0;
-    z-index: 3;
+    transform: translateZ(3px);
 }
 .pile-type-waste .card-outer:nth-last-child(2) {
-    left: -2.5rem;
-    z-index: 2;
+    left: -50%;
+    transform: translateZ(2px);
 }
 .pile-type-waste .card-outer:nth-last-child(3) {
-    left: -5rem;
-    z-index: 1;
+    left: -100%;
+    transform: translateZ(1px);
 }
 
 .pile-type-waste .card-outer {
-    left: -5rem;
-    z-index: 0;
+    left: -100%;
+    transform: translateZ(0);
     transition: all 0.3s;
-    transform-style: preserve-3d;
-    transition-timing-function: cubic-bezier(0.23, 1, 0.320, 1);
+    transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
 }

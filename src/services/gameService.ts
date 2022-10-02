@@ -44,11 +44,10 @@ export function populateTableau(stock: Stock): [Stock, Tableau] {
 
 // Move a card from stock to waste.
 export function moveStockToWaste(stock: Stock, waste: Waste): [Stock, Waste] {
-    const stock2 = stock.slice();
-    let card = stock2.pop();
-    if (card) {
-        card = flipCardUp(card);
-        return [stock2, [...waste, card]];
+    if (stock.length) {
+        const stockCopy = stock.slice();
+        const card = flipCardUp(stockCopy.pop()!);
+            return [stockCopy, [...waste, card]];
     }
     return [stock, waste];
 }
@@ -73,19 +72,6 @@ export function moveWasteToTableau(waste: Waste, tableau: Tableau, p: number): [
     return [waste, tableau];
 }
 
-// Move card from waste to foundation pile.
-export function moveWasteToFoundation(waste: Waste, foundation: Foundation, p: number): [Waste, Foundation] {
-    const wasteCopy = waste.slice();
-    const top = wasteCopy.pop();
-    const bottom = foundation[p][foundation[p].length - 1];
-    if (top && isNextFoundationCard(top, bottom)) {
-        const foundationCopy = foundation.slice();
-        foundationCopy[p] = [...foundationCopy[p], top];
-        return [wasteCopy, foundationCopy];
-    }
-    return [waste, foundation];
-}
-
 // Shift cards between piles in the tableau.
 export function movePile(tableau: Tableau, p1: number, p2: number, idx: number): Tableau {
     const top = tableau[p1][idx];
@@ -101,6 +87,27 @@ export function movePile(tableau: Tableau, p1: number, p2: number, idx: number):
     return tableau;
 }
 
+// Ensure ace is in the right pile, according to its suit.
+function moveToFoundation(foundation: Foundation, card: PlayingCard, pileIndex: number): Foundation {
+    const foundationCopy = foundation.slice();
+    if (card.value === CardValue.Ace) {
+        foundationCopy[card.suit] = foundationCopy[card.suit].concat(card);
+    } else {
+        foundationCopy[pileIndex] = foundationCopy[pileIndex].concat(card);
+    }
+    return foundationCopy;
+}
+
+// Move card from waste to foundation pile.
+export function moveWasteToFoundation(waste: Waste, foundation: Foundation, idx: number): [Waste, Foundation] {
+    const top = waste[waste.length - 1];
+    const bottom = foundation[idx][foundation[idx].length - 1];
+    if (isNextFoundationCard(top, bottom)) {
+        return [waste.slice(0, -1), moveToFoundation(foundation, top, idx)];
+    }
+    return [waste, foundation];
+}
+
 // Move a card to the foundation from a tableau pile.
 export function moveTableauCardToFoundation(
     tableau: Tableau,
@@ -114,13 +121,7 @@ export function moveTableauCardToFoundation(
     if (isNextFoundationCard(top, bottom)) {
         const tableauCopy = tableau.slice();
         tableauCopy[p] = tableauCopy[p].slice(0, c);
-        const foundationCopy = foundation.slice();
-        // Ensure ace is in the right pile, according to its suit.
-        if (top.value === CardValue.Ace) {
-            foundationCopy[top.suit] = foundationCopy[top.suit].concat(top);
-        } else {
-            foundationCopy[idx] = foundationCopy[idx].concat(top);
-        }
+        const foundationCopy = moveToFoundation(foundation, top, idx);
         return [tableauCopy, foundationCopy];
     }
     return [tableau, foundation];
@@ -135,7 +136,7 @@ export function flipCardInTableau(tableau: Tableau, pileIndex: number, cardIndex
         tableauCopy[pileIndex] = pile;
         return tableauCopy;
     }
-    return tableau
+    return tableau;
 }
 
 // Create a new card.
@@ -164,23 +165,17 @@ export function isSameSuit(c1: PlayingCard, c2: PlayingCard): boolean {
 }
 
 export function flipCardUp(c: PlayingCard): PlayingCard {
-    if (c) {
-        return {
-            ...c,
-            faceUp: true,
-        };
-    }
-    return c;
+    return {
+        ...c,
+        faceUp: true,
+    };
 }
 
 export function flipCardDown(c: PlayingCard): PlayingCard {
-    if (c) {
-        return {
-            ...c,
-            faceUp: false,
-        };
-    }
-    return c;
+    return {
+        ...c,
+        faceUp: false,
+    };
 }
 
 export function initGame(): Solitaire {

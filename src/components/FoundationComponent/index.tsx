@@ -2,7 +2,7 @@ import React from "react";
 import { Foundation, Pile } from "../../model";
 import { DropFunction, getDraggable, getDroppable } from "../../services/dragdropService";
 import { AppContext } from "../../enums/AppContext";
-import CardStackComponent from "../CardStackComponent";
+import PileComponent from "../PileComponent";
 import "./styles.css";
 
 type Props = {
@@ -12,7 +12,7 @@ type Props = {
 
 export default function FoundationComponent({ foundation, onDrop }: Props) {
     return (
-        <div className="foundation">
+        <div className={AppContext.Foundation}>
             {foundation.map((pile: Pile, pileIndex: number) => {
                 const dropSetup = (pidx: number) => (cardIndex?: number) => {
                     const dropPayload = {
@@ -29,7 +29,7 @@ export default function FoundationComponent({ foundation, onDrop }: Props) {
                     return getDraggable(AppContext.Foundation, dropPayload);
                 }
                 return (
-                    <CardStackComponent
+                    <PileComponent
                         key={pileIndex}
                         pile={pile}
                         onDropSetup={dropSetup(pileIndex)}

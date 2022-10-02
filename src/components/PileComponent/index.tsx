@@ -15,7 +15,7 @@ type Props = {
 /*
 Handles stacking/nesting of cards and drag/drop.
  */
-export default function CardStackComponent({
+export default function PileComponent({
     pile,
     onClick,
     onDoubleClick,

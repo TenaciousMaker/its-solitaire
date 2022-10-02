@@ -20,7 +20,7 @@ export default function CardComponent({suit, value, faceUp, onClick, onDoubleCli
         <div className={containerClass}>
             <div className='card-inner'>
                 <div className='card-back' onClick={onClick}></div>
-                <div className={cardClass} onDoubleClick={onDoubleClick}>{cardDisplay}</div>
+                {faceUp && <div className={cardClass} onDoubleClick={onDoubleClick}>{cardDisplay}</div>}
             </div>
         </div>
     );

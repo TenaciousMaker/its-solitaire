@@ -2,7 +2,7 @@ import React from "react";
 import { AppContext } from "../../enums/AppContext";
 import { Stock } from "../../model";
 import { DropFunction, getDraggable, getDroppable } from "../../services/dragdropService";
-import CardStackComponent from "../CardStackComponent";
+import PileComponent from "../PileComponent";
 import "./styles.css";
 
 type Props = {
@@ -26,8 +26,8 @@ export default function StockComponent({
         return getDraggable(AppContext.Stock, {cardIndex});
     }
     return (
-        <div className='stock'>
-            <CardStackComponent
+        <div className={AppContext.Stock}>
+            <PileComponent
                 pile={stock}
                 onClick={handleClick}
                 onDropSetup={dropSetup}

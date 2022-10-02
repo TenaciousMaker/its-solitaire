@@ -2,7 +2,7 @@ import React from "react";
 import { AppContext } from "../../enums/AppContext";
 import { Waste } from "../../model";
 import { getDraggable } from "../../services/dragdropService";
-import CardStackComponent from "../CardStackComponent";
+import PileComponent from "../PileComponent";
 import "./styles.css";
 
 type Props = {
@@ -24,8 +24,8 @@ export default function WasteComponent({
         return {};
     }
     return (
-        <div className='waste'>
-            <CardStackComponent
+        <div className={AppContext.Waste}>
+            <PileComponent
                 pile={waste}
                 pileType={AppContext.Waste}
                 onDoubleClick={handleDoubleClick}

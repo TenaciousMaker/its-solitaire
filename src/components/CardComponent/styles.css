@@ -1,5 +1,4 @@
 .card-container {
-    box-sizing: border-box;
     height: 0;
     user-select: none;
 }
@@ -14,17 +13,16 @@
 
 .card-inner {
     aspect-ratio: var(--card-aspect);
-    width: var(--card-width);
     transition: transform 0.5s;
-    transform: rotateY(0);
-    transform-style: preserve-3d;
+    transform: rotateY(0) translateZ(0);
     transition-timing-function: cubic-bezier(0.23, 1, 0.320, 1);
+    transform-style: preserve-3d;
     border: 1px solid lightslategray;
     border-radius: 3px;
 }
 
 .flipped .card-inner {
-    transform: rotateY(180deg);
+    transform: rotateY(180deg) translateZ(0);
 }
 
 .card-front, .card-back {
@@ -34,18 +32,20 @@
     box-sizing: border-box;
     border-radius: 3px;
     backface-visibility: hidden;
+    transform-style: preserve-3d;
 }
 
 .card-front {
     background-color: white;
     padding: 0.5rem;
-    transform: rotateY(180deg);
+    transform: rotateY(180deg) translateZ(1px);
 }
 
 .card-back {
     background-image: url(images/playing-card-back.png);
     background-repeat: no-repeat;
     background-size: cover;
+    transform: translateZ(-1px);
 }
 
 .card-front.club, .card-front.spade {
