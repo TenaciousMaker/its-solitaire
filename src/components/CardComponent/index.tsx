@@ -21,8 +21,17 @@ export default function CardComponent({suit, value, faceUp, onClick, onDoubleCli
                 <div className='card-back' onClick={onClick}></div>
                 {faceUp &&
                     <div className={cardClass} onDoubleClick={onDoubleClick}>
-                        <div className='value-display'>{CARD_VALUE_DISPLAY[value]}</div>
-                        <div className='suit-display'>{SUIT_VALUE_DISPLAY[suit]}</div>
+                        <div className='card-corner card-corner-top'>
+                            <div className='value-display'>{CARD_VALUE_DISPLAY[value]}</div>
+                            <div className='suit-display'>{SUIT_VALUE_DISPLAY[suit]}</div>
+                        </div>
+                        <div className='card-center'>
+                            <div className='suit-display'>{SUIT_VALUE_DISPLAY[suit]}</div>
+                        </div>
+                        <div className='card-corner card-corner-bottom'>
+                            <div className='value-display'>{CARD_VALUE_DISPLAY[value]}</div>
+                            <div className='suit-display'>{SUIT_VALUE_DISPLAY[suit]}</div>
+                        </div>
                     </div>}
             </div>
         </div>

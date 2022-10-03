@@ -1,20 +1,31 @@
 :root {
     --card-aspect: 5/7;
     --layout-gap: 1rem;
-    box-sizing: border-box;
+    --color-background-light: rgb(51 140 51);
+}
+
+body {
+    background-color: green;
+    background-image: url(images/bg.png);
+}
+
+.logo {
+    grid-area: lg;
+    margin-bottom: 2rem;
 }
 
 .game {
-    background-color: green;
     display: grid;
     max-width: 950px;
+    height: 100vh;
     grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: repeat(2, auto);
+    grid-template-rows: auto auto 1fr;
     grid-template-areas:
+        "lg lg lg .  .  ct ct"
         "fd fd fd fd .  ws st"
         "tb tb tb tb tb tb tb";
     gap: var(--layout-gap);
-    padding: 5rem;
+    padding: 2.5rem 5rem;
     margin: 0 auto;
 }
 
@@ -24,12 +35,46 @@
     }
     .game {
         padding: 0.5rem;
-        grid-template-rows: repeat(3, auto);
+        grid-template-rows: auto auto 1fr;
         grid-template-areas:
-            ". . . . . ws st"
-            "fd fd fd fd . . ."
-            "tb tb tb tb tb tb tb";
+            "lg lg lg .  .  ws st"
+            "fd fd fd fd .  .  ."
+            "tb tb tb tb tb tb tb"
+            ".  .  .  .  ct ct ct";
     }
+    .logo {
+        grid-area: lg;
+        margin: 0;
+        width: 100%;
+        place-self: center;
+    }
+}
+
+.controls {
+    grid-area: ct;
+    justify-self: end;
+}
+
+button {
+    background-color: var(--color-background-light);
+    border: 4px solid forestgreen;
+    color: rgb(255 255 255 / 0.5);
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.7rem 0.7rem;
+    font-size: 1rem;
+    box-shadow: 0px 0px 2px white inset;
+    line-height: 1rem;
+    letter-spacing: -1px;
+    margin: -4px;
+}
+
+button:hover {
+    box-shadow: 0px 0px 3px white inset;
+    color: rgb(255 255 255 / 0.6)
+}
+
+button:active {
+    box-shadow: 0px 0px 2px white inset;
 }
 
 .foundation {

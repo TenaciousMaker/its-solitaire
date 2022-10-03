@@ -19,11 +19,19 @@ import "./styles.css";
 import { Foundation } from "../../model";
 
 export default function AppComponent() {
-    const solitaire = initGame();
+    let solitaire = initGame();
     const [stock, setStock] = useState(solitaire.stock);
     const [waste, setWaste] = useState(solitaire.waste);
     const [tableau, setTableau] = useState(solitaire.tableau);
     const [foundation, setFoundation] = useState(solitaire.foundation);
+
+    function resetGame() {
+        solitaire = initGame();
+        setStock(solitaire.stock);
+        setWaste(solitaire.waste);
+        setFoundation(solitaire.foundation);
+        setTableau(solitaire.tableau);
+    }
 
     let handleDrop: DropFunction = (
         contextTo,
@@ -123,6 +131,10 @@ export default function AppComponent() {
 
     return (
         <div className="game">
+            <img src="images/logo.svg" alt="It's Solitaire!" className="logo" />
+            <div className="controls">
+                <button onClick={resetGame}>New Game</button>
+            </div>
             <FoundationComponent
                 foundation={foundation}
                 onDrop={handleDrop}
@@ -136,10 +148,6 @@ export default function AppComponent() {
                 onClick={handleClick(AppContext.Stock)}
                 onDrop={handleDrop}
             />
-            {/* <div className="top-container">
-                <div className="stock-container">
-                </div>
-            </div> */}
             <TableauComponent
                 tableau={tableau}
                 onDrop={handleDrop}
