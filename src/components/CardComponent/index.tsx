@@ -14,13 +14,16 @@ type Props = PlayingCard & {
 export default function CardComponent({suit, value, faceUp, onClick, onDoubleClick}: Props) {
     const containerClass = `card-container${faceUp ? ' flipped' : ''}`;
     const cardClass = `card-front ${SUIT_CLASS[suit]}`;
-    const cardDisplay = `${CARD_VALUE_DISPLAY[value]} ${SUIT_VALUE_DISPLAY[suit]}`;
 
     return (
         <div className={containerClass}>
             <div className='card-inner'>
                 <div className='card-back' onClick={onClick}></div>
-                {faceUp && <div className={cardClass} onDoubleClick={onDoubleClick}>{cardDisplay}</div>}
+                {faceUp &&
+                    <div className={cardClass} onDoubleClick={onDoubleClick}>
+                        <div className='value-display'>{CARD_VALUE_DISPLAY[value]}</div>
+                        <div className='suit-display'>{SUIT_VALUE_DISPLAY[suit]}</div>
+                    </div>}
             </div>
         </div>
     );

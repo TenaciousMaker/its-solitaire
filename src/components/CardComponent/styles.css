@@ -1,6 +1,7 @@
 .card-container {
     height: 0;
     user-select: none;
+    --border-radius: 5%;
 }
 
 .pile-type-tableau .card-container {
@@ -15,10 +16,10 @@
     aspect-ratio: var(--card-aspect);
     transition: transform 0.5s;
     transform: rotateY(0) translateZ(0);
-    transition-timing-function: cubic-bezier(0.23, 1, 0.320, 1);
+    transition-timing-function: cubic-bezier(0.5, 0, 0, 1);
     transform-style: preserve-3d;
     border: 1px solid lightslategray;
-    border-radius: 3px;
+    border-radius: var(--border-radius);
 }
 
 .flipped .card-inner {
@@ -30,7 +31,7 @@
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    border-radius: 3px;
+    border-radius: var(--border-radius);
     backface-visibility: hidden;
     transform-style: preserve-3d;
 }
@@ -54,4 +55,10 @@
 
 .card-front.diamond, .card-front.heart {
     color: red;
+}
+
+@media screen and (min-width: 500px) {
+    .value-display, .suit-display {
+        display: inline-block;
+    }
 }

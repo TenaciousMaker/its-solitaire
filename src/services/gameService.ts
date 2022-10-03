@@ -139,9 +139,22 @@ export function flipCardInTableau(tableau: Tableau, pileIndex: number, cardIndex
     return tableau;
 }
 
-// Create a new card.
 export function getCard(suit: CardSuit, value: CardValue, faceUp: boolean = false): PlayingCard {
     return {suit, value, faceUp, key: `${suit}${value}`};
+}
+
+export function flipCardUp(c: PlayingCard): PlayingCard {
+    return {
+        ...c,
+        faceUp: true,
+    };
+}
+
+export function flipCardDown(c: PlayingCard): PlayingCard {
+    return {
+        ...c,
+        faceUp: false,
+    };
 }
 
 export function isNextTableauCard(top: PlayingCard, bottom: PlayingCard): boolean {
@@ -162,20 +175,6 @@ export function isAltSuit(c1: PlayingCard, c2: PlayingCard): boolean {
 
 export function isSameSuit(c1: PlayingCard, c2: PlayingCard): boolean {
     return c2 ? c1?.suit === c2.suit : true;
-}
-
-export function flipCardUp(c: PlayingCard): PlayingCard {
-    return {
-        ...c,
-        faceUp: true,
-    };
-}
-
-export function flipCardDown(c: PlayingCard): PlayingCard {
-    return {
-        ...c,
-        faceUp: false,
-    };
 }
 
 export function initGame(): Solitaire {
