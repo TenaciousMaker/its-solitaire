@@ -1,11 +1,12 @@
-import React, { createRef, ReactHTML, ReactHTMLElement } from "react";
-import { Pile } from "../../model";
+import React, { createRef, ReactNode, useEffect } from "react";
+import { Pile, PlayingCard } from "../../model";
 import CardComponent from "../CardComponent";
 import "./styles.css";
 
 type Props = {
     pile: Pile;
     pileType?: "tableau" | "waste";
+    renderRecursively?: boolean;
     onClick?(cardIndex?: number): void;
     onDoubleClick?(cardIndex: number): void;
     onDragSetup(cardIndex: number): void;
@@ -17,11 +18,12 @@ Handles stacking/nesting of cards and drag/drop.
  */
 export default function PileComponent({
     pile,
+    pileType,
+    renderRecursively = false,
     onClick,
     onDoubleClick,
     onDragSetup,
     onDropSetup,
-    pileType,
 }: Props) {
     const pileClass = `pile${
         pileType ? " pile-type-" + pileType : ""
@@ -47,38 +49,58 @@ export default function PileComponent({
         });
     }
 
+    // Clean up after component unmounts.
+    useEffect(() => {
+        return () => {
+            refs.length = 0;
+        }
+    });
+
+    function renderCards(cards: Pile, cardIndex: number = 0): ReactNode[] {
+        if (cardIndex === cards.length) {
+            return [];
+        }
+
+        const card: PlayingCard = cards[cardIndex];
+        const handleClick = () => {
+            if (onClick) {
+                onClick(cardIndex);
+            }
+        }
+        const handleDoubleClick = () => {
+            if (onDoubleClick) {
+                onDoubleClick(cardIndex);
+            }
+        }
+        // const ref = createRef<HTMLDivElement>();
+        // refs.push(ref);
+        const node = (
+            <div
+                // ref={ref}
+                key={card.key}
+                className={`card-outer${card.faceUp ? ' droppable' : ''}`}
+                {...((card.faceUp && onDragSetup) ? onDragSetup(cardIndex) : {})}
+                {...((card.faceUp && onDropSetup) ? onDropSetup(cardIndex) : {})}
+            >
+                <CardComponent
+                    {...card}
+                    onClick={handleClick}
+                    onDoubleClick={handleDoubleClick}
+                />
+                {renderRecursively && renderCards(cards, cardIndex + 1)}
+            </div>
+        );
+
+        if (renderRecursively) {
+            return [node];
+        } else {
+            return [node, ...renderCards(cards, cardIndex + 1)];
+        }
+    }
+
     return (
         <div className={pileClass} {...(onDropSetup ? onDropSetup() : {})} onClick={handleEmptyClick}>
-            {pile.map((card, cardIndex) => {
-                function handleClick() {
-                    if (onClick) {
-                        onClick(cardIndex);
-                    }
-                }
-                function handleDoubleClick() {
-                    if (onDoubleClick) {
-                        onDoubleClick(cardIndex);
-                        // explode();
-                    }
-                }
-                const ref = createRef<HTMLDivElement>();
-                // refs.push(ref);
-                return (
-                    <div
-                        ref={ref}
-                        key={card.key}
-                        className="card-outer"
-                        {...(onDragSetup ? onDragSetup(cardIndex) : {})}
-                        {...(onDropSetup ? onDropSetup(cardIndex) : {})}
-                    >
-                        <CardComponent
-                            {...card}
-                            onClick={handleClick}
-                            onDoubleClick={handleDoubleClick}
-                        />
-                    </div>
-                );
-            })}
+            {renderCards(pile)}
         </div>
     );
 }

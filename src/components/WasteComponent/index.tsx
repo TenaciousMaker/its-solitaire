@@ -18,6 +18,7 @@ export default function WasteComponent({
         onDoubleClick(cardIndex);
     }
     const dragSetup = (cardIndex: number) => {
+        // Only allow dragging the top card.
         if (cardIndex === waste.length - 1) {
             return getDraggable(AppContext.Waste, {cardIndex});
         }

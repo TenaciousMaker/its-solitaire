@@ -45,6 +45,7 @@ export default function TableauComponent({ tableau, onDrop, onClick, onDoubleCli
                         onDoubleClick={handleDoubleClick}
                         onDropSetup={dropSetup(pileIndex)}
                         onDragSetup={dragSetup(pileIndex)}
+                        renderRecursively
                     />
                 );
             })}
