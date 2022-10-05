@@ -16,7 +16,6 @@ import StockComponent from "../StockComponent";
 import WasteComponent from "../WasteComponent";
 import FoundationComponent from "../FoundationComponent";
 import "./styles.css";
-import { Foundation } from "../../model";
 
 export default function AppComponent() {
     let solitaire = initGame();
@@ -133,7 +132,7 @@ export default function AppComponent() {
         <div className="game">
             <img src="images/logo.svg" alt="It's Solitaire!" className="logo" />
             <div className="controls">
-                <button onClick={resetGame}>New Game</button>
+                <button onClick={resetGame} data-testid="newgame">New Game</button>
             </div>
             <FoundationComponent
                 foundation={foundation}
