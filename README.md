@@ -1,7 +1,7 @@
 ![Game Screenshot](public/images/screenshot.png?raw=true "It's Solitaire!")
 
 # It's Solitaire!
-A classic game of Solitaire for all to enjoy.
+A classic [game of Solitaire](https://its-solitaire.vercel.app/) for all to enjoy.
 
 
 ## Available Scripts
