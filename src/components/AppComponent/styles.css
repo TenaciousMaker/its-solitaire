@@ -79,6 +79,9 @@ button:active {
 
 .foundation {
     grid-area: fd;
+}
+
+.foundation > ul {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: var(--layout-gap);
@@ -94,6 +97,8 @@ button:active {
 
 .tableau {
     grid-area: tb;
+}
+.tableau > ul {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: var(--layout-gap);

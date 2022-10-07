@@ -131,9 +131,9 @@ export default function AppComponent() {
     return (
         <div className="game">
             <img src="images/logo.svg" alt="It's Solitaire!" className="logo" />
-            <div className="controls">
+            <section className="controls">
                 <button onClick={resetGame} data-testid="newgame">New Game</button>
-            </div>
+            </section>
             <FoundationComponent
                 foundation={foundation}
                 onDrop={handleDrop}

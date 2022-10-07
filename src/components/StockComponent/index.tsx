@@ -26,13 +26,13 @@ export default function StockComponent({
         return getDraggable(AppContext.Stock, {cardIndex});
     }
     return (
-        <div className={AppContext.Stock}>
+        <section className={AppContext.Stock}>
             <PileComponent
                 pile={stock}
                 onClick={handleClick}
                 onDropSetup={dropSetup}
                 onDragSetup={dragSetup}
             />
-        </div>
+        </section>
     );
 }

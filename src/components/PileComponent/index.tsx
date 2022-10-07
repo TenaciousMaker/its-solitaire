@@ -75,7 +75,7 @@ export default function PileComponent({
         // const ref = createRef<HTMLDivElement>();
         // refs.push(ref);
         const node = (
-            <div
+            <li
                 // ref={ref}
                 key={card.key}
                 className={`card-outer${card.faceUp ? ' droppable' : ''}`}
@@ -88,19 +88,19 @@ export default function PileComponent({
                     onDoubleClick={handleDoubleClick}
                 />
                 {renderRecursively && renderCards(cards, cardIndex + 1)}
-            </div>
+            </li>
         );
 
         if (renderRecursively) {
-            return [node];
+            return [(<ul key={card.key}>{node}</ul>)];
         } else {
             return [node, ...renderCards(cards, cardIndex + 1)];
         }
     }
 
     return (
-        <div className={pileClass} {...(onDropSetup ? onDropSetup() : {})} onClick={handleEmptyClick}>
+        <ul className={pileClass} {...(onDropSetup ? onDropSetup() : {})} onClick={handleEmptyClick}>
             {renderCards(pile)}
-        </div>
+        </ul>
     );
 }

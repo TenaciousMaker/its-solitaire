@@ -25,13 +25,13 @@ export default function WasteComponent({
         return {};
     }
     return (
-        <div className={AppContext.Waste}>
+        <section className={AppContext.Waste}>
             <PileComponent
                 pile={waste}
                 pileType={AppContext.Waste}
                 onDoubleClick={handleDoubleClick}
                 onDragSetup={dragSetup}
             />
-        </div>
+        </section>
     );
 }
