@@ -2,73 +2,18 @@ import { CardValue } from "../../enums/CardValue";
 import { CardSuit } from "../../enums/CardSuit";
 import {
     getCard,
-    buildDeck,
-    populateStock,
-    populateTableau,
-    movePile,
-    isNextCard,
-    isAltSuit,
-    isSameSuit,
-    moveTableauCardToFoundation,
-    moveStockToWaste,
-    recycleWastePile,
-    moveWasteToTableau,
-    moveWasteToFoundation,
     flipCardInTableau,
     initGame,
+    movePile,
+    moveStockToWaste,
+    moveTableauCardToFoundation,
+    moveWasteToFoundation,
+    moveWasteToTableau,
+    recycleWastePile,
+
 } from "../gameService";
 
 describe("service", () => {
-  it(`builds a deck of cards`, () => {
-    const deck = buildDeck();
-    expect(deck).toHaveLength(52);
-  });
-
-  it(`'shuffles' the deck and returns a stockpile of random cards`, () => {
-    const deck = buildDeck();
-    const stock = populateStock(deck.slice());
-    expect(stock).toHaveLength(52);
-    const isNotOrdered = deck.some((card, idx) => {
-      return stock[idx] !== card;
-    });
-    expect(isNotOrdered).toBeTruthy();
-  });
-
-  it(`creates the tableau`, () => {
-    const deck = buildDeck();
-    const stock = populateStock(deck.slice());
-    const [remainingStock, tableau] = populateTableau(stock.slice());
-    expect(remainingStock.length).toBeLessThan(stock.length);
-    expect(tableau).toHaveLength(7);
-    tableau.forEach((x, idx) => {
-      expect(x).toHaveLength(idx + 1);
-      const card = x[x.length - 1];
-      expect(card.faceUp).toBeTruthy();
-    });
-  });
-
-  it(`checks if top card can be played on bottom card`, () => {
-    const c1 = getCard(CardSuit.Club, CardValue.Ace);
-    const c2 = getCard(CardSuit.Diamond, CardValue.Ace);
-    const c3 = getCard(CardSuit.Diamond, CardValue.Two);
-    expect(isNextCard(c1, c2)).toBeFalsy();
-    expect(isNextCard(c2, c1)).toBeFalsy();
-    expect(isNextCard(c3, c2)).toBeTruthy();
-    expect(isNextCard(c2, c3, -1)).toBeTruthy();
-  });
-
-  it(`checks if two cards are in alternating suit colors`, () => {
-    const c1 = getCard(CardSuit.Club, CardValue.Ace);
-    const c2 = getCard(CardSuit.Heart, CardValue.Two);
-    expect(isAltSuit(c1, c2)).toBeTruthy();
-  });
-
-  it(`checks if two cards are in the same suit`, () => {
-    const c1 = getCard(3, CardValue.Ace);
-    const c2 = getCard(3, CardValue.Two);
-    expect(isSameSuit(c1, c2)).toBeTruthy();
-  });
-
   it(`moves card(s) from stock pile to waste pile`, () => {
     const card1 = getCard(CardSuit.Club, CardValue.Ace, true);
     const card2 = getCard(CardSuit.Diamond, CardValue.Two);

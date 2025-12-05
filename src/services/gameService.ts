@@ -143,38 +143,38 @@ export function getCard(suit: CardSuit, value: CardValue, faceUp: boolean = fals
     return {suit, value, faceUp, key: `${suit}${value}`};
 }
 
-export function flipCardUp(c: PlayingCard): PlayingCard {
+function flipCardUp(c: PlayingCard): PlayingCard {
     return {
         ...c,
         faceUp: true,
     };
 }
 
-export function flipCardDown(c: PlayingCard): PlayingCard {
+function flipCardDown(c: PlayingCard): PlayingCard {
     return {
         ...c,
         faceUp: false,
     };
 }
 
-export function isNextTableauCard(top: PlayingCard, bottom: PlayingCard): boolean {
+function isNextTableauCard(top: PlayingCard, bottom: PlayingCard): boolean {
     return (bottom ? isNextCard(top, bottom, -1) && isAltSuit(top, bottom) : top.value === CardValue.King);
 }
 
-export function isNextFoundationCard(top: PlayingCard, bottom: PlayingCard): boolean {
+function isNextFoundationCard(top: PlayingCard, bottom: PlayingCard): boolean {
     return (bottom ? isNextCard(top, bottom) && isSameSuit(top, bottom) : top.value === CardValue.Ace);
 }
 
-export function isNextCard(top: PlayingCard, bottom: PlayingCard, increment: number = 1): boolean {
+function isNextCard(top: PlayingCard, bottom: PlayingCard, increment: number = 1): boolean {
     return top.value === bottom.value + increment;
 }
 
-export function isAltSuit(c1: PlayingCard, c2: PlayingCard): boolean {
-    return c1 !== undefined && c2 !== undefined && (c1.suit % 2 !== c2.suit % 2);
+function isAltSuit(c1: PlayingCard, c2: PlayingCard): boolean {
+    return c1.suit % 2 !== c2.suit % 2;
 }
 
-export function isSameSuit(c1: PlayingCard, c2: PlayingCard): boolean {
-    return c2 ? c1?.suit === c2.suit : true;
+function isSameSuit(c1: PlayingCard, c2: PlayingCard): boolean {
+    return c1.suit === c2.suit;
 }
 
 export function initGame(): Solitaire {

@@ -17,7 +17,7 @@ body {
 .game {
     display: grid;
     max-width: 950px;
-    height: 100vh;
+    /* height: 100vh; */
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: auto auto 1fr;
     grid-template-areas:
@@ -33,6 +33,7 @@ body {
     :root {
         --layout-gap: 2px;
     }
+
     .game {
         padding: 0.5rem;
         grid-template-rows: auto auto 1fr;
@@ -42,6 +43,7 @@ body {
             "tb tb tb tb tb tb tb"
             ".  .  .  .  ct ct ct";
     }
+
     .logo {
         grid-area: lg;
         margin: 0;
@@ -81,7 +83,7 @@ button:active {
     grid-area: fd;
 }
 
-.foundation > ul {
+.foundation>ul {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: var(--layout-gap);
@@ -98,7 +100,8 @@ button:active {
 .tableau {
     grid-area: tb;
 }
-.tableau > ul {
+
+.tableau>ul {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: var(--layout-gap);
